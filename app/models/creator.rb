@@ -1,3 +1,3 @@
 class Creator < ActiveRecord::Base
-    include ScamsModels::Concerns::Models::Creator
+  include ScamsModels::Concerns::Models::Creator
 end

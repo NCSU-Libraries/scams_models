@@ -1,3 +1,3 @@
 class Work < ActiveRecord::Base
-    include ScamsModels::Concerns::Models::Work
+  include ScamsModels::Concerns::Models::Work
 end

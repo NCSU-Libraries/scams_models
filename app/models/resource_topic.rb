@@ -1,5 +1,5 @@
 class ResourceTopic < ActiveRecord::Base
   
-    include ScamsModels::Concerns::Models::ResourceTopic
+  include ScamsModels::Concerns::Models::ResourceTopic
   
 end

@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
   
-    include ScamsModels::Concerns::Models::Topic
+  include ScamsModels::Concerns::Models::Topic
   
 end

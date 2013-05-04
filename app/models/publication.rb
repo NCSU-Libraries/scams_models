@@ -1,3 +1,3 @@
 class Publication < ActiveRecord::Base
-    include ScamsModels::Concerns::Models::Publication
+  include ScamsModels::Concerns::Models::Publication
 end
