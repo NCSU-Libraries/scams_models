@@ -44,6 +44,7 @@ module ScamsModels::Concerns::Models::Resource
     has_many :bitstreams, :through => :bundles
   end
 
+  # FIXME: reconcile the two different ways of getting asset types for resources
   def match_simple_asset_type?(asset_type)
     asset_types.first && asset_types.first.asset_type == asset_type
   end
@@ -55,5 +56,41 @@ module ScamsModels::Concerns::Models::Resource
   def video?
     match_simple_asset_type?('Video')
   end
+
+  def simple_asset_types
+    asset_types.map do |at|
+      at.asset_type
+    end
+  end
+
+  def still_image?
+    simple_asset_types.include? 'Still image'
+  end
+
+  def drawing?
+    simple_asset_types.include? 'Drawing'
+  end
+
+  def pdf_url
+    if pdf
+      collection = fileName.split('-').first
+      "http://d.lib.ncsu.edu/pdfs/#{collection}/#{fileName}.pdf"
+    end
+  end
+
+  def basename
+    if fileName.include?('_')
+      basename_parts = fileName.split('_')
+      last_part = basename_parts.pop
+      if /\d{4}$/.match(last_part)
+        basename_parts.join('_')
+      else
+        fileName
+      end
+    else
+      fileName
+    end
+  end
+
 
 end

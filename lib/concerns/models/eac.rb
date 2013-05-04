@@ -22,4 +22,8 @@ module ScamsModels::Concerns::Models::Eac
     end
   end
 
+  def person?
+    subjectType == 'personal'
+  end
+
 end
