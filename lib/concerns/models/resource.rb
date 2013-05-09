@@ -44,6 +44,11 @@ module ScamsModels::Concerns::Models::Resource
     has_many :bitstreams, :through => :bundles
   end
 
+  def filename
+    fileName
+  end
+
+
   # FIXME: reconcile the two different ways of getting asset types for resources
   def match_simple_asset_type?(asset_type)
     asset_types.first && asset_types.first.asset_type == asset_type
