@@ -32,4 +32,9 @@ module ScamsModels::Concerns::Models::Bundle
   def png
     av_extension(:png).first
   end
+
+  def vtt
+    av_extension(:vtt).first
+  end
+
 end
