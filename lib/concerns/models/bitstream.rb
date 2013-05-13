@@ -14,7 +14,7 @@ module ScamsModels::Concerns::Models::Bitstream
   end
 
   def url
-    if audio? or video? or image?
+    if audio? or video? or image? or vtt?
       File.join(base_av_url, bundle.filename, filename)
     end
   end
@@ -29,6 +29,10 @@ module ScamsModels::Concerns::Models::Bitstream
 
   def image?
     %w[png].include? extension
+  end
+
+  def vtt?
+    %w[vtt].include? extension
   end
 
 end
