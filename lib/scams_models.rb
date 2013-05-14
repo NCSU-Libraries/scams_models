@@ -1,7 +1,7 @@
 # ScamsModels
 
 require 'scams_models/engine'
-
+require 'webvtt'
 
 module ScamsModels
   module Concerns

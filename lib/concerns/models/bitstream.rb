@@ -35,4 +35,17 @@ module ScamsModels::Concerns::Models::Bitstream
     %w[vtt].include? extension
   end
 
+  def webvtt
+    begin
+      uri = URI.parse(url)
+      response = Net::HTTP.get_response(uri)
+      if response.code == "200"
+        Webvtt::File.new(response.body)
+      else
+        false
+      end
+    rescue => e
+    end
+  end
+
 end
