@@ -48,4 +48,15 @@ module ScamsModels::Concerns::Models::Bitstream
     end
   end
 
+  def duration_iso8601
+    hours  =  duration / 1.hour
+    minutes = (duration - hours.hours) / 1.minute
+    seconds = duration - hours.hours - minutes.minutes
+    output = 'T'
+    output << "#{hours}H" if hours > 0
+    output << "#{minutes}M" if minutes > 0
+    output << "#{seconds}S" if seconds > 0
+    output
+  end
+
 end
