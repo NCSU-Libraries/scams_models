@@ -59,4 +59,12 @@ module ScamsModels::Concerns::Models::Bitstream
     output
   end
 
+  def duration_pretty
+    if !duration.blank?
+      total_minutes = duration / 1.minutes
+      seconds_in_last_minute = duration - total_minutes.minutes.seconds
+      %Q|#{total_minutes}:#{"%02d" % seconds_in_last_minute}|
+    end
+  end
+
 end
