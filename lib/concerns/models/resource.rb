@@ -62,6 +62,10 @@ module ScamsModels::Concerns::Models::Resource
     match_simple_asset_type?('Video')
   end
 
+  def folder?
+    match_simple_asset_type?('Folder')
+  end
+
   def simple_asset_types
     asset_types.map do |at|
       at.asset_type
