@@ -20,4 +20,11 @@ module ScamsModels::Concerns::Models::Work
     has_many :work_creators
   end
 
+  def has_address?
+    !street.blank? or
+    !community.blank? or
+    !state.blank? or
+    !zip.blank?
+  end
+
 end
