@@ -2,7 +2,7 @@ module ScamsModels::Concerns::Models::Bitstream
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :bundle
+    belongs_to :bundle, inverse_of: :bitstreams
     delegate :resource, :to => :bundle
     attr_accessible :extension, :filename, :intention, :type
     self.inheritance_column = :type_inheritance

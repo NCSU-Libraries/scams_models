@@ -3,7 +3,7 @@ module ScamsModels::Concerns::Models::Bundle
 
   included do
     belongs_to :resource
-    has_many :bitstreams
+    has_many :bitstreams, inverse_of: :bundle
     attr_accessible :description, :filename, :title, :type
     self.inheritance_column = :type_inheritance
   end
