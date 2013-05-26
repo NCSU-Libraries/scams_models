@@ -13,6 +13,14 @@ module ScamsModels::Concerns::Models::Bundle
     bitstreams.where(:extension => extension)
   end
 
+  def audio?
+    resource.audio?
+  end
+
+  def video?
+    resource.video?
+  end
+
   def mp3
     av_extension(:mp3).first
   end
