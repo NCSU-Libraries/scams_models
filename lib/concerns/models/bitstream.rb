@@ -16,7 +16,14 @@ module ScamsModels::Concerns::Models::Bitstream
   def url
     if audio? or video? or image? or vtt?
       File.join(base_av_url, bundle.filename, filename)
+    elsif pdf?
+      # FIXME: put the splitting somewhere else
+      File.join('http://d.lib.ncsu.edu/pdfs/', filename.split('-').first , filename)
     end
+  end
+
+  def pdf?
+    %w[pdf].include? extension
   end
 
   def audio?
