@@ -4,7 +4,7 @@ module ScamsModels::Concerns::Models::Jp2
   included do
     belongs_to :resource
     belongs_to :crop
-    default_scope { order("filename ASC") }
+    default_scope -> { order("filename ASC") }
   end
 
   # URL for the largest level image available
