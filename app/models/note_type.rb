@@ -1,3 +1,3 @@
-class NoteType < ActiveRecord::Base
+class NoteType < ApplicationRecord
   include ScamsModels::Concerns::Models::NoteType
 end

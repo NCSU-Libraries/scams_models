@@ -1,3 +1,3 @@
-class Eac < ActiveRecord::Base
+class Eac < ApplicationRecord
   include ScamsModels::Concerns::Models::Eac
 end

@@ -1,3 +1,3 @@
-class Language < ActiveRecord::Base
+class Language < ApplicationRecord
   include ScamsModels::Concerns::Models::Language
 end
