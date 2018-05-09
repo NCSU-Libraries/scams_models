@@ -5,7 +5,7 @@ module ScamsModels::Concerns::Models::Division
     belongs_to :resource  
     belongs_to :division_type
     has_many :pages, :dependent => :destroy
-    default_scope :order => 'divisionSequenceNumber ASC'
+    default_scope { order ('divisionSequenceNumber ASC')}
   end
 
 end
