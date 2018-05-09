@@ -1,3 +1,3 @@
-class IsPartOf < ActiveRecord::Base
+class IsPartOf < ApplicationRecord
   include ScamsModels::Concerns::Models::IsPartOf
 end

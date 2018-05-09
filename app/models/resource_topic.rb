@@ -1,4 +1,4 @@
-class ResourceTopic < ActiveRecord::Base
+class ResourceTopic < ApplicationRecord
   
   include ScamsModels::Concerns::Models::ResourceTopic
   

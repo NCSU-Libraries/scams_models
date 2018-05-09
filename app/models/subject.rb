@@ -1,3 +1,3 @@
-class Subject < ActiveRecord::Base
+class Subject < ApplicationRecord
   include ScamsModels::Concerns::Models::Subject
 end

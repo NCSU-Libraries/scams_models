@@ -1,4 +1,4 @@
-class ResourceDate < ActiveRecord::Base
+class ResourceDate < ApplicationRecord
   
   include ScamsModels::Concerns::Models::ResourceDate
 end

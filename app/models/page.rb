@@ -1,3 +1,3 @@
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   include ScamsModels::Concerns::Models::Page
 end

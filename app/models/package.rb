@@ -1,3 +1,3 @@
-class Package < ActiveRecord::Base
+class Package < ApplicationRecord
   include ScamsModels::Concerns::Models::Package
 end

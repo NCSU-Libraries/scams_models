@@ -1,3 +1,3 @@
-class GeographicLocation < ActiveRecord::Base
+class GeographicLocation < ApplicationRecord
   include ScamsModels::Concerns::Models::GeographicLocation
 end

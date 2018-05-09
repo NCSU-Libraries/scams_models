@@ -1,3 +1,3 @@
-class NameRole < ActiveRecord::Base
+class NameRole < ApplicationRecord
   include ScamsModels::Concerns::Models::NameRole
 end

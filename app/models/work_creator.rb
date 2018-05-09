@@ -1,3 +1,3 @@
-class WorkCreator < ActiveRecord::Base
+class WorkCreator < ApplicationRecord
   include ScamsModels::Concerns::Models::WorkCreator
 end

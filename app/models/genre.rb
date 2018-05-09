@@ -1,3 +1,3 @@
-class Genre < ActiveRecord::Base
+class Genre < ApplicationRecord
   include ScamsModels::Concerns::Models::Genre
 end

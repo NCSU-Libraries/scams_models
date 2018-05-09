@@ -1,3 +1,3 @@
-class DivisionType < ActiveRecord::Base
+class DivisionType < ApplicationRecord
   include ScamsModels::Concerns::Models::DivisionType
 end

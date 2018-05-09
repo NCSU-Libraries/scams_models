@@ -1,3 +1,3 @@
-class Division < ActiveRecord::Base
+class Division < ApplicationRecord
   include ScamsModels::Concerns::Models::Division
 end

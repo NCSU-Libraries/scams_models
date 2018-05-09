@@ -1,3 +1,3 @@
-class Bitstream < ActiveRecord::Base
+class Bitstream < ApplicationRecord
   include ScamsModels::Concerns::Models::Bitstream
 end
