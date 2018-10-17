@@ -23,9 +23,10 @@ module ScamsModels::Concerns::Models::IsPartOf
         @active = nil if reload
         @active ||= find(:all, :conditions => 'thumbnail_url LIKE "%scrc.lib.ncsu.edu%"')
       end
+      # This may be the only method that is used or tested here.
       def stubs(reload=false)
         @active = nil if reload
-        @active ||= find(:all, :conditions => {:recordStatus => 'level 0'})
+        @active ||= where(:recordStatus => 'level 0')
       end
       def project_records(reload=false)
         @active = nil if reload
@@ -34,7 +35,7 @@ module ScamsModels::Concerns::Models::IsPartOf
       def not_a_text(reload=false)
         @active = nil if reload
         @active ||= find(:all, :include => [:asset_types], :conditions => "asset_types.asset_type != 'Text'")
-      end 
+      end
     end
 
 
