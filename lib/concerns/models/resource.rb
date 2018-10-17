@@ -26,7 +26,7 @@ module ScamsModels::Concerns::Models::Resource
 
     has_and_belongs_to_many :subjects
 
-    has_many :resource_dates, :order => 'date_field ASC', :dependent => :destroy
+    has_many :resource_dates, -> { order('date_field ASC') }, :dependent => :destroy
 
     has_one :series_title, :dependent => :destroy
     has_many :title_others, :dependent => :destroy
