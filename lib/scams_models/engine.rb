@@ -14,7 +14,7 @@ module ScamsModels
           Work, WorkCreator, WorkExternalLink, WorkGeographicLocation,
           WorkNote, WorkSubject, WorkType
           ].each do |klass|
-            klass #.send(:establish_connection, "scams_#{Rails.env}")
+            klass.send(:connection)
         end
       end
     end
