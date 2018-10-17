@@ -1,3 +1,3 @@
-class Classification < ActiveRecord::Base
+class Classification < ScamsModelBase
   include ScamsModels::Concerns::Models::Classification
 end

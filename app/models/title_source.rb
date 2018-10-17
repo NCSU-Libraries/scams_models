@@ -1,3 +1,3 @@
-class TitleSource < ActiveRecord::Base
+class TitleSource < ScamsModelBase
   include ScamsModels::Concerns::Models::TitleSource
 end

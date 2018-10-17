@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Topic < ScamsModelBase
   
   include ScamsModels::Concerns::Models::Topic
   

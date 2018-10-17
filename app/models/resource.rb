@@ -1,3 +1,3 @@
-class Resource < ActiveRecord::Base
+class Resource < ScamsModelBase
   include ScamsModels::Concerns::Models::Resource
 end

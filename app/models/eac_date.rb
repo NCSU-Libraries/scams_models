@@ -1,3 +1,3 @@
-class EacDate < ActiveRecord::Base
+class EacDate < ScamsModelBase
   include ScamsModels::Concerns::Models::EacDate
 end

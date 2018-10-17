@@ -1,3 +1,3 @@
-class Expression < ActiveRecord::Base
+class Expression < ScamsModelBase
   include ScamsModels::Concerns::Models::Expression
 end

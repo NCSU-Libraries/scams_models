@@ -1,3 +1,3 @@
-class Right < ActiveRecord::Base
+class Right < ScamsModelBase
   include ScamsModels::Concerns::Models::Right
 end

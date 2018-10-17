@@ -1,3 +1,3 @@
-class Jp2 < ActiveRecord::Base
+class Jp2 < ScamsModelBase
   include ScamsModels::Concerns::Models::Jp2
 end

@@ -1,3 +1,3 @@
-class WorkSubject < ActiveRecord::Base
+class WorkSubject < ScamsModelBase
   include ScamsModels::Concerns::Models::WorkSubject
 end

@@ -1,3 +1,3 @@
-class DigitalFormat < ActiveRecord::Base
+class DigitalFormat < ScamsModelBase
   include ScamsModels::Concerns::Models::DigitalFormat
 end

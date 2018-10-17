@@ -1,3 +1,3 @@
-class Bundle < ActiveRecord::Base
+class Bundle < ScamsModelBase
   include ScamsModels::Concerns::Models::Bundle
 end

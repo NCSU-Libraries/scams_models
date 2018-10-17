@@ -1,3 +1,3 @@
-class SeriesTitle < ActiveRecord::Base
+class SeriesTitle < ScamsModelBase
   include ScamsModels::Concerns::Models::SeriesTitle
 end

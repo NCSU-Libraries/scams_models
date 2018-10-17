@@ -1,3 +1,3 @@
-class Crop < ActiveRecord::Base
+class Crop < ScamsModelBase
   include ScamsModels::Concerns::Models::Crop
 end

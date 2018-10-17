@@ -1,3 +1,3 @@
-class DigitalCreator < ActiveRecord::Base
+class DigitalCreator < ScamsModelBase
   include ScamsModels::Concerns::Models::DigitalCreator
 end

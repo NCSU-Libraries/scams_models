@@ -1,3 +1,3 @@
-class Repository < ActiveRecord::Base
+class Repository < ScamsModelBase
   include ScamsModels::Concerns::Models::Repository
 end
