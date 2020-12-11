@@ -9,16 +9,23 @@ module ScamsModels::Concerns::Models::Bitstream
   end
 
 
-  def base_av_url
-    'http://siskel.lib.ncsu.edu/SCRC/'
+  def exttotype
+    if audio? or video?
+      'avmaterial'
+    elsif image?
+      'poster'
+    elsif vtt?
+      'captions'
+    elsif pdf?
+      'transcript'
+    end
   end
 
   def url
-    if audio? or video? or image? or vtt?
-      File.join(base_av_url, bundle.filename, filename)
-    elsif pdf?
-      # FIXME: put the splitting somewhere else
-      File.join('http://d.lib.ncsu.edu/pdfs/', filename.split('-').first , filename)
+    if audio? or video? or image? or vtt? or pdf?
+        item = bundle.avpd_response[exttotype]
+        item = item.class == 'Array' ? item.select{|elem| elem['id'].include? bundle.filename}.first : item
+        item ? item['id'] : nil
     end
   end
 
@@ -47,7 +54,7 @@ module ScamsModels::Concerns::Models::Bitstream
       uri = URI.parse(url)
       response = Net::HTTP.get_response(uri)
       if response.code == "200"
-        Webvtt::File.new(response.body)
+        WebVTT.from_blob(response.body)
       else
         false
       end
