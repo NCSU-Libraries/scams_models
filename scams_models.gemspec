@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", ">= 3.2.13"
-  s.add_dependency 'webvtt-ruby'
+  s.add_dependency 'webvtt'
 end

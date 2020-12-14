@@ -54,7 +54,7 @@ module ScamsModels::Concerns::Models::Bitstream
       uri = URI.parse(url)
       response = Net::HTTP.get_response(uri)
       if response.code == "200"
-        WebVTT.from_blob(response.body)
+        Webvtt::File.new(response.body)
       else
         false
       end
