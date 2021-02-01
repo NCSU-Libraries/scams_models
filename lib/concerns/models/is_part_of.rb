@@ -26,7 +26,7 @@ module ScamsModels::Concerns::Models::IsPartOf
       # This may be the only method that is used or tested here.
       def stubs(reload=false)
         @active = nil if reload
-        @active ||= find(:all, :conditions => {:recordStatus => 'level 0'})
+        @active ||= where(:recordStatus => 'level 0')
       end
       def project_records(reload=false)
         @active = nil if reload
