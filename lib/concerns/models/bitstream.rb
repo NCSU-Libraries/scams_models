@@ -21,12 +21,30 @@ module ScamsModels::Concerns::Models::Bitstream
     end
   end
 
+  def avpd_item
+    item = bundle.avpd_response[exttotype]
+    item = item.class == Array ? item.select{|elem| elem['id'].include? extension}.first : item
+    item
+  end
+
   def url
     if audio? or video? or image? or vtt? or pdf?
-        item = bundle.avpd_response[exttotype]
-        item = item.class == 'Array' ? item.select{|elem| elem['id'].include? bundle.filename}.first : item
-        item ? item['id'] : nil
+        avpd_item ? avpd_item['id'] : nil
     end
+  end
+
+  def duration
+    if audio? or video?
+      bundle.avpd_duration
+    end
+  end
+
+  def width
+    avpd_item ? avpd_item['width'] : nil
+  end
+
+  def height
+    avpd_item ? avpd_item['height'] : nil
   end
 
   def pdf?

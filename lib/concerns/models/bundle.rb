@@ -13,6 +13,53 @@ module ScamsModels::Concerns::Models::Bundle
     bitstreams.where(:extension => extension)
   end
 
+  def avpd_base_url
+    "https://avpd.lib.ncsu.edu"
+  end
+
+  def avpd_api_url
+    File.join avpd_base_url, "api/av/#{filename}"
+  end
+
+  def avpd_response
+    if @avpd_response
+      @avpd_response
+    else
+      client = HTTPClient.new
+      response = client.get(avpd_api_url)
+      if response.code > 399
+        @avpd_response = {}
+      else
+        json = response.body
+        @avpd_response = JSON.parse(json)
+      end
+    end
+  end
+
+  def iso8601tosecs(raw_duration)
+    match = raw_duration.match(/PT(?:([0-9]*)H)*(?:([0-9]*)M)*(?:([0-9.]*)S)*/)
+    hours   = match[1].to_i
+    minutes = match[2].to_i
+    seconds = match[3].to_f
+    seconds + (60 * minutes) + (60 * 60 * hours)
+  end
+
+  def avpd_duration
+    avpd_response['duration'] ? iso8601tosecs(avpd_response['duration']) : "0:00"
+  end
+
+  def avpd_captions_response
+    avpd_response['captions']
+  end
+
+  def captions?
+    avpd_captions_response.present?
+  end
+
+  def avpd_poster
+    avpd_response['poster'] ? avpd_response['poster']['id'] : nil
+  end
+
   def audio?
     resource.audio?
   end
