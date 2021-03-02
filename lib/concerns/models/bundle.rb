@@ -10,7 +10,54 @@ module ScamsModels::Concerns::Models::Bundle
 
 
   def av_extension(extension)
-    bitstreams.where(:extension => extension)
+    avpd_response['avmaterials'].select{|material| material['format'].include?(extension)}
+  end
+
+  def avpd_base_url
+    "https://avpd.lib.ncsu.edu"
+  end
+
+  def avpd_api_url
+    File.join avpd_base_url, "api/av/#{filename}"
+  end
+
+  def avpd_response
+    if @avpd_response
+      @avpd_response
+    else
+      client = HTTPClient.new
+      response = client.get(avpd_api_url)
+      if response.code > 399
+        @avpd_response = {}
+      else
+        json = response.body
+        @avpd_response = JSON.parse(json)
+      end
+    end
+  end
+
+  def iso8601tosecs(raw_duration)
+    match = raw_duration.match(/PT(?:([0-9]*)H)*(?:([0-9]*)M)*(?:([0-9.]*)S)*/)
+    hours   = match[1].to_i
+    minutes = match[2].to_i
+    seconds = match[3].to_f
+    seconds + (60 * minutes) + (60 * 60 * hours)
+  end
+
+  def avpd_duration
+    avpd_response['duration'] ? iso8601tosecs(avpd_response['duration']) : "0:00"
+  end
+
+  def avpd_captions_response
+    avpd_response['captions']
+  end
+  
+  def captions?
+    avpd_captions_response.present?
+  end
+
+  def avpd_poster
+    avpd_response['poster'] ? avpd_response['poster']['id'] : nil
   end
 
   def audio?
@@ -22,27 +69,27 @@ module ScamsModels::Concerns::Models::Bundle
   end
 
   def mp3
-    av_extension(:mp3).first
+    av_extension('mp3').first
   end
 
   def ogg
-    av_extension(:ogg).first
+    av_extension('ogg').first
   end
 
   def mp4
-    av_extension(:mp4).first
+    av_extension('mp4').first
   end
 
   def webm
-    av_extension(:webm).first
+    av_extension('webm').first
   end
 
   def png
-    av_extension(:png).first
+    avpd_response['poster']
   end
 
   def vtt
-    av_extension(:vtt).first
+    avpd_captions_response ? avpd_captions_response['id'] : nil
   end
 
 end

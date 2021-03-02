@@ -9,17 +9,42 @@ module ScamsModels::Concerns::Models::Bitstream
   end
 
 
-  def base_av_url
-    'http://siskel.lib.ncsu.edu/SCRC/'
+  def exttotype
+    if audio? or video?
+      'avmaterial'
+    elsif image?
+      'poster'
+    elsif vtt?
+      'captions'
+    elsif pdf?
+      'transcript'
+    end
+  end
+
+  def avpd_item
+    item = bundle.avpd_response[exttotype]
+    item = item.class == Array ? item.select{|elem| elem['id'].include? extension}.first : item
+    item
   end
 
   def url
-    if audio? or video? or image? or vtt?
-      File.join(base_av_url, bundle.filename, filename)
-    elsif pdf?
-      # FIXME: put the splitting somewhere else
-      File.join('http://d.lib.ncsu.edu/pdfs/', filename.split('-').first , filename)
+    if audio? or video? or image? or vtt? or pdf?
+        avpd_item ? avpd_item['id'] : nil
     end
+  end
+
+  def duration
+    if audio? or video?
+      bundle.avpd_duration
+    end
+  end
+
+  def width
+    avpd_item ? avpd_item['width'] : nil
+  end
+
+  def height
+    avpd_item ? avpd_item['height'] : nil
   end
 
   def pdf?
