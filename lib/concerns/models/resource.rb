@@ -87,6 +87,39 @@ module ScamsModels::Concerns::Models::Resource
     end
   end
 
+
+  def duration
+    bundles.map{|bundle| bundle.avpd_duration}.sum
+  end
+
+  def av?
+    audio? || video?
+  end
+
+  def transcripts
+    bundles.map{|bundle|bundle.transcript} if av?
+  end
+
+  def transcripts?
+    if av?
+      bundles.any?{|bundle| bundle.transcript?}
+    else
+      false
+    end
+  end
+
+  def captions?
+    if av?
+      bundles.any?{|bundle| bundle.captions?}
+    else
+      false
+    end
+  end
+
+  def poster
+    bundles.map{|bundle|bundle.avpd_poster}.first
+  end
+
   def basename
     if fileName.include?('_')
       basename_parts = fileName.split('_')
