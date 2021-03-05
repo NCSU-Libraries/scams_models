@@ -8,11 +8,6 @@ module ScamsModels::Concerns::Models::Bundle
     self.inheritance_column = :type_inheritance
   end
 
-
-  def av_extension(extension)
-    avpd_response['avmaterials'].select{|material| material['format'].include?(extension)}
-  end
-
   def avpd_base_url
     "https://avpd.lib.ncsu.edu"
   end
@@ -36,12 +31,20 @@ module ScamsModels::Concerns::Models::Bundle
     end
   end
 
+  def av_extension(extension)
+    avpd_response.present? && avpd_response['avmaterial'].present? ? avpd_response['avmaterial'].select{|material| material['format'].include?(extension)} : []
+  end
+
   def iso8601tosecs(raw_duration)
     match = raw_duration.match(/PT(?:([0-9]*)H)*(?:([0-9]*)M)*(?:([0-9.]*)S)*/)
     hours   = match[1].to_i
     minutes = match[2].to_i
     seconds = match[3].to_f
     seconds + (60 * minutes) + (60 * 60 * hours)
+  end
+
+  def iso8601duration
+    avpd_response['duration'] ? avpd_response['duration'] : nil
   end
 
   def avpd_duration
@@ -90,6 +93,19 @@ module ScamsModels::Concerns::Models::Bundle
 
   def vtt
     avpd_captions_response ? avpd_captions_response['id'] : nil
+  end
+
+  def webvtt
+    begin
+      uri = URI.parse(vtt)
+      response = Net::HTTP.get_response(uri)
+      if response.code == "200"
+        Webvtt::File.new(vtt)
+      else
+        false
+      end
+    rescue => e
+    end
   end
 
 end
