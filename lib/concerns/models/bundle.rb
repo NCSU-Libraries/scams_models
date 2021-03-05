@@ -95,4 +95,17 @@ module ScamsModels::Concerns::Models::Bundle
     avpd_captions_response ? avpd_captions_response['id'] : nil
   end
 
+  def webvtt
+    begin
+      uri = URI.parse(vtt)
+      response = Net::HTTP.get_response(uri)
+      if response.code == "200"
+        Webvtt::File.new(response.body)
+      else
+        false
+      end
+    rescue => e
+    end
+  end
+
 end
