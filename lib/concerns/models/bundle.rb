@@ -100,7 +100,7 @@ module ScamsModels::Concerns::Models::Bundle
       uri = URI.parse(vtt)
       response = Net::HTTP.get_response(uri)
       if response.code == "200"
-        Webvtt::File.new(response.body)
+        Webvtt::File.new(vtt)
       else
         false
       end
