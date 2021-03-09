@@ -48,7 +48,7 @@ module ScamsModels::Concerns::Models::Bundle
   end
 
   def avpd_duration
-    avpd_response['duration'] ? iso8601tosecs(avpd_response['duration']) : "0:00"
+    avpd_response['duration'] ? iso8601tosecs(avpd_response['duration']) : 0
   end
 
   def avpd_captions_response
@@ -100,7 +100,7 @@ module ScamsModels::Concerns::Models::Bundle
       uri = URI.parse(vtt)
       response = Net::HTTP.get_response(uri)
       if response.code == "200"
-        Webvtt::File.new(vtt)
+        Webvtt::File.new(response.body)
       else
         false
       end
