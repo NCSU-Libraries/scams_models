@@ -1,4 +1,5 @@
 class ScamsModelBase < ActiveRecord::Base
   self.abstract_class = true
-  establish_connection "scams_#{Rails.env}"
+
+  connects_to database: { writing: :scams, reading: :scams }
 end
