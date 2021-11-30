@@ -20,7 +20,7 @@ module ScamsModels
           Work, WorkCreator, WorkExternalLink, WorkGeographicLocation,
           WorkNote, WorkSubject, WorkType
           ].each do |klass|
-            klass.send(:establish_connection, "scams_#{Rails.env}")
+            klass.send(:connects_to, database: { writing: :scams, reading: :scams })
         end
       end
     end
